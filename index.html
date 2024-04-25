@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4SW2</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            font-size: 50px;
+            font-family: Lora;
+            color: #6994b5;
+        }
+        p {
+            font-family: Gill Sans;
+            font-size: 30px;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .btn-operation {
+            margin: 5px;
+        }
+        .btn-primary {
+            color: black;
+        }
+        body {
+            background-image: url(https://img.freepik.com/free-photo/white-paper-texture-background_23-2151025778.jpg?size=626&ext=jpg&ga=GA1.1.553209589.1713916800&semt=ais);
+           background-repeat: no-repeat;
+           background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Basic Calculator</h1>
+        <p>Enter two numbers below to calculate.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <label for="num1">Enter the 1st number:</label>
+                <input type="number" id="num1" class="form-control mb-2">
+                <label for="num2">Enter the 2nd number:</label>
+                <input type="number" id="num2" class="form-control mb-2">
+                <div class="btn-group" role="group">
+                    <button onclick="performAddition()" class="btn btn-primary btn-operation">Add</button>
+                    <button onclick="performSubtraction()" class="btn btn-primary btn-operation">Subtract</button>
+                    <button onclick="performMultiplication()" class="btn btn-primary btn-operation">Multiply</button>
+                    <button onclick="performDivision()" class="btn btn-primary btn-operation">Divide</button>
+                </div>
+            </div>
+        </div>
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script>
+        var resultDiv = document.getElementById('result');
+
+        function performAddition() {
+            performOperation('+');
+        }
+
+        function performSubtraction() {
+            performOperation('-');
+        }
+
+        function performMultiplication() {
+            performOperation('*');
+        }
+
+        function performDivision() {
+            performOperation('/');
+        }
+
+        function performOperation(operator) {
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDiv.innerHTML = '<div class="alert alert-danger" role="alert">Please enter valid numbers.</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<h3>Result:</h3>';
+            switch (operator) {
+                case '+':
+                    resultDiv.innerHTML += '<p>' + num1 + ' + ' + num2 + ' = ' + (num1 + num2) + '</p>';
+                    break;
+                case '-':
+                    resultDiv.innerHTML += '<p>' + num1 + ' - ' + num2 + ' = ' + (num1 - num2) + '</p>';
+                    break;
+                case '*':
+                    resultDiv.innerHTML += '<p>' + num1 + ' * ' + num2 + ' = ' + (num1 * num2) + '</p>';
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        resultDiv.innerHTML = '<div class="alert alert-danger" role="alert">Cannot divide by zero.</div>';
+                        return;
+                    }
+                    resultDiv.innerHTML += '<p>' + num1 + ' / ' + num2 + ' = ' + (num1 / num2) + '</p>';
+                    break;
+                default:
+                    resultDiv.innerHTML = '<div class="alert alert-danger" role="alert">Invalid operation.</div>';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
